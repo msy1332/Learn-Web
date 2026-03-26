@@ -1,28 +1,30 @@
 {
-    "version": "0.2.0",
-    "configurations": [
+    "version": "0.2.0", // 指定配置文件遵循的格式版本
+    "configurations" : [// 调试配置 
+        // 调试 c++的配置
         {
-            "name": "(gdb) Launch", // 配置名称，将会在启动配置的下拉菜单中显示  
-            "type": "cppdbg",       // 配置类型，这里只能为cppdbg  
-            "request": "launch",    // 请求配置类型，可以为launch（启动）或attach（附加）  
-            "program": "${workspaceFolder}/${fileBasenameNoExtension}.exe",// 将要进行调试的程序的路径  
-            "args": ["&" ,"pause"],             // 程序调试时传递给程序的命令行参数，一般设为空即可  
-            "stopAtEntry": false,   // 设为true时程序将暂停在程序入口处，一般设置为false  
-            "cwd": "${workspaceFolder}", // 调试程序时的工作目录，一般为${workspaceFolder}即代码所在目录  
-            "environment": [],  
-            "externalConsole": true, // 调试时是否显示控制台窗口，一般设置为true显示控制台  
-            "MIMode": "gdb",  
-            "miDebuggerPath": "D:\\GCC.CMake\\mingw64\\bin\\gdb.exe", // miDebugger的路径，注意这里要与MinGw的路径对应  
-            "setupCommands": [  
-                {   
-                    "description": "Enable pretty-printing for gdb",  
-                    "text": "-enable-pretty-printing",  
-                    "ignoreFailures": true  
-                }  
+            "name": "(gdb) Launch", // 指定名称
+            "type": "cppdbg", // 指定调试类型，而 cppdbg表示就是使用C++调试器
+            "request": "launch", // 指定请求类型，而 launch表示的就是启动一个新进程
+            "program": "${workspaceFolder}\\bin\\${fileBasenameNoExtension}.exe", // 指定你要调试的可执行文件路径
+            "args": [], // 指定要传递给程序的命令行参数
+            "stopAtEntry": false, // 指定是否要再程序入口 主函数(main)处暂停
+            "cwd": "${workspaceFolder}", // 指定调试的工作目录
+            "environment": [], // 配置一些环境变量
+            "externalConsole": false, // 指定是=是否要使用外部控制台窗口
+            "MIMode": "gdb", // 指定调试模式，gdb表示使用GNU调试器
+            "miDebuggerPath": "D:\\Develop\\Env\\mingw64\\bin\\gdb.exe", // 指定GDB调试器的完整路径
+            "setupCommands": [ // 指定GDB初始化命令
+                {
+                    // 启用漂亮打印功能，让STL容器（vector、map、string等）显示更友好
+                    "description": "Enable pretty-printing for gdb",
+                    "text": "-enable-pretty-printing",
+                    // 即使命令失败也继续执行
+                    "ignoreFailures": true
+                }
             ],
-            "preLaunchTask": "g++ build active file",//和tasks中label保持一致
-            "internalConsoleOptions": "neverOpen"
+            "preLaunchTask": "Compilation c++ program", // 指定调试前的自动执行任务名称
+            "internalConsoleOptions": "openOnSessionStart" // 指定是否要打开 vs code内部的调试控制台，而neverOpen表示的是从自动不打开，openOnSessionStart 每次调试都自动打开
         }
-    ],
-    "compounds": []
+    ]
 }

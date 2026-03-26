@@ -1,0 +1,30 @@
+// 将键绑定放在此文件中以覆盖默认值
+[
+    // {
+    //     "key": "ctrl+win+t",
+    //     "command": "workbench.action.createTerminalEditor",
+    //     "when": "terminalProcessSupported"
+    // },
+    {
+        "key": "shift+tab",
+        "command": "workbench.action.switchWindow"
+    },
+    {
+        "key": "ctrl+alt+r",
+        "command": "workbench.action.tasks.runTask", // 来指定执行命令，workbench.action.tasks.runTask表示的就是运行一个任务（即在 tasks.json定义的任务）
+        "args": "Compilation and Run c++ program", // 指定参数，这里的的话就是指定任务的名称
+        "when": "editorLangId == cpp" // 通过条件判断文件的语言类型是不是C++
+    },
+    {
+        "key": "ctrl+alt+r",
+        "command": "workbench.action.tasks.runTask", // 来指定执行命令，workbench.action.tasks.runTask表示的就是运行一个任务（即在 tasks.json定义的任务）
+        "args": "Run Node.js program", // 指定参数，这里的的话就是指定任务的名称
+        "when": "editorLangId == javascript" // 通过条件判断文件的语言类型是不是 Javascript
+    },
+    {
+        "key": "ctrl+alt+r",
+        "command": "workbench.action.tasks.runTask", // 来指定执行命令，workbench.action.tasks.runTask表示的就是运行一个任务（即在 tasks.json定义的任务）
+        "args": "Run Python program", // 指定参数，这里的的话就是指定任务的名称
+        "when": "editorLangId == python" // 通过条件判断文件的语言类型是不是 Python
+    }
+]

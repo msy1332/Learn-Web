@@ -1,28 +1,129 @@
 {
-    "tasks": [
+    "version": "2.0.0", // 指定配置文件遵循的格式版本
+    "tasks": [ //来自定义任务
+        // 编译任务，用于编译C++程序
         {
-            "type": "cppbuild",
-            "label": "g++ build active file",
-            "command": "D:\\GCC.CMake\\mingw64\\bin\\g++.exe",
+            "label": "Compilation c++ program", // 设置任务的名称（任务的名称是任务的唯一标识）
+            "type": "shell", // 指定如何执行命令
+            "windows": { // windows平台
+                "command": "g++", // 指定要执行的命令
+                "args": [ // 指定命令行参数
+                    "-g", // 生成调试信息
+                    "-Wall",
+                    "\"${file}\"", // 指定要编译哪个文件
+                    "-o", // 指定可执行文件的输出目录
+                    "\"${workspaceFolder}\\bin\\${fileBasenameNoExtension}.exe\"" // 来指定输出目录
+                ],
+            },
+            "linux": { // Linux平台执行的命令
+                "command": "g++", // 指定要执行的命令
+                "args": [ // 指定命令行参数
+                    "-g", // 生成调试信息
+                    "\"${file}\"", // 指定要编译哪个文件
+                    "-o", // 指定可执行文件的输出目录
+                    "\"${workspaceFolder}/bin/${fileBasenameNoExtension}\"" // 来指定输出目录
+                ],
+            },
+            "group": { // 任务分组
+                "kind": "build", // 将任务归类为构建任务
+                "isDefault": true // 设置默认构建任务（Ctrl + shift + B键触发）
+            },
+            "problemMatcher": "$gcc", // 指定问题匹配器，用于解析编译错误
+            "presentation": { // 指定控制终端的显示方式
+                "echo": true, // 是否在终端中显示执行命令
+                "reveal": "always", // 控制何时自动显示终端面板，always表示任务执行时总是显示终端面板
+                "focus": false, // 当任务执行时是否聚焦到终端上
+                "panel": "shared", // 指定任务是哪个终端面板，dedicated表示的就是为每个任务创建独立的终端面板（但同一个任务会重用此终端面板），而 shared表示的就是多个任务共享同一终端面板
+                // "showReuseMessage": true, // 指定当终端被重用是是否显示一则提示消息
+                "clear": false // 指定当任务执行前是否终端面板已有的内容
+            }
+        },
+        // 运行任务，用于运行C++程序
+        {
+            "label": "Run c++ program", // 设置任务的名称（任务的名称是任务的唯一标识）
+            "type": "process",
+            "windows": { // windows平台
+                // "command": "\"${workspaceFolder}/bin/${fileBasenameNoExtension}.exe\"", // 指定要执行的命令
+                "command": "cmd", // 指定要执行的命令
+                "args": [
+                    "/c",
+                    "start",
+                    "cmd",
+                    "/c",
+                    "chcp 65001 > nul && cd /d ${workspaceFolder} && ${workspaceFolder}/bin/${fileBasenameNoExtension}.exe && pause",
+                ]
+            },
+            "linux": { // Linux平台
+                "command": "${workspaceFolder}/bin/${fileBasenameNoExtension}", // 指定要执行的命令
+                // "command": "gnome-terminal",
+                // "args": [
+                //     "--", // 指定之后的参数将会作为新建的终端要执行的命令
+                //     "bash", // 指定在新建的终端之后终端中启动 bash 作为解释器
+                //     "-c", // 告诉 bash将后面跟随的字符串作为命令
+                //     "./\"${workspaceFolder}/bin/${fileBasenameNoExtension}\";echo 'Press any key to close...'; read -n 1"
+                // ]
+            },
+            "problemMatcher": "$gcc", // 指定问题匹配器，用于解析编译错误
+            "presentation": { // 指定控制终端的显示方式
+                "echo": true, // 是否在终端中显示执行命令
+                "reveal": "always", // 控制何时自动显示终端面板，always表示任务执行时总是显示终端面板
+                "focus": false, // 当任务执行时是否聚焦到终端上
+                "panel": "shared", // 指定任务是哪个终端面板，dedicated表示的就是为每个任务创建独立的终端面板（但同一个任务会重用此终端面板），而 shared表示的就是多个任务共享同一终端面板
+                // "showReuseMessage": true, // 指定当终端被重用是是否显示一则提示消息
+                "clear": false // 指定当任务执行前是否终端面板已有的内容
+            }
+        },
+        // 复合任务，用于编译并运行C++程序
+        {
+            "label": "Compilation and Run c++ program", // 设置任务的名称（任务的名称是任务的唯一标识）
+            // "command" : "echo Currently Compilation and Run c++ program", // 指定要执行的命令
+            "dependsOrder": "sequence", // 指定任务的执行顺序，sequence表示的就是按照依赖数组的顺序执行，而parallel表示的就是所有依赖任务并行执行
+            "dependsOn": [
+                "Compilation c++ program",
+                "Run c++ program"
+            ], // 指定依赖任务
+        },
+        // node.js 运行任务
+        {
+            "label": "Run Node.js program", // 设置任务的名称（任务的名称是任务的唯一标识）
+            "command": "node", // 指定要执行的命令
             "args": [
-                "-fdiagnostics-color=always",
-                "-g",
-                "${file}",
-                "-o",
-                "${fileDirname}/${fileBasenameNoExtension}"
+                "${file}"
             ],
-            "options": {
-                "cwd": "${fileDirname}"
+            "group": { // 任务分组
+                // "kind": "build", // 将任务归类为构建任务
+                // "isDefault": true // 设置默认构建任务（Ctrl + shift + B键触发）
             },
-            "problemMatcher": [
-                "$gcc"
+            "problemMatcher": "$node-sass", // 指定问题匹配器，用于解析编译错误
+            "presentation": { // 指定控制终端的显示方式
+                "echo": true, // 是否在终端中显示执行命令
+                "reveal": "always", // 控制何时自动显示终端面板，always表示任务执行时总是显示终端面板
+                "focus": false, // 当任务执行时是否聚焦到终端上
+                "panel": "shared", // 指定任务是哪个终端面板，dedicated表示的就是为每个任务创建独立的终端面板（但同一个任务会重用此终端面板），而 shared表示的就是多个任务共享同一终端面板
+                "showReuseMessage": true, // 指定当终端被重用是是否显示一则提示消息
+                "clear": true // 指定当任务执行前是否终端面板已有的内容
+            }
+        },
+        // python 运行任务
+        {
+            "label": "Run Python program", // 设置任务的名称（任务的名称是任务的唯一标识）
+            "command": "python", // 指定要执行的命令
+            "args": [
+                "${file}"
             ],
-            "group": {
-                "kind": "build",
-                "isDefault": true
+            "group": { // 任务分组
+                // "kind": "build", // 将任务归类为构建任务
+                // "isDefault": true // 设置默认构建任务（Ctrl + shift + B键触发）
             },
-            "detail": "调试器生成的任务。"
-        }
-    ],
-    "version": "2.0.0"
+            "problemMatcher": "$python", // 指定问题匹配器，用于解析编译错误
+            "presentation": { // 指定控制终端的显示方式
+                "echo": true, // 是否在终端中显示执行命令
+                "reveal": "always", // 控制何时自动显示终端面板，always表示任务执行时总是显示终端面板
+                "focus": false, // 当任务执行时是否聚焦到终端上
+                "panel": "shared", // 指定任务是哪个终端面板，dedicated表示的就是为每个任务创建独立的终端面板（但同一个任务会重用此终端面板），而 shared表示的就是多个任务共享同一终端面板
+                "showReuseMessage": true, // 指定当终端被重用是是否显示一则提示消息
+                "clear": true // 指定当任务执行前是否终端面板已有的内容
+            }
+        },
+    ]
 }
