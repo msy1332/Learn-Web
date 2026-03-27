@@ -3,7 +3,12 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>CloudDriveView</title>
+    <!--引入字体图标CSS(Font Awesome) -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    />
+    <title>CloudDrive</title>
     <style>
       * {
         padding: 0px;
@@ -14,103 +19,232 @@
         width: 100%;
         height: 100%;
       }
-      body {
-        display: flex;
-      }
-      .side_bar {
-        width: 20%;
-        height: 100%;
-        background-color: rgb(27, 26, 26);
-        color: rgb(161, 161, 170);
 
-        display: flex;
-        flex-direction: column;
-        justify-content: flex-start;
-        align-items: flex-start;
+      /* 网页结构代码 */
+      body {
+        display: grid;
+        grid-template-columns: 200px 1fr;
+        grid-template-rows: 60px 1fr;
+        grid-template-areas:
+          "side_bar top_nav"
+          "side_bar content";
+      }
+      .top_nav {
+        grid-area: top_nav;
+        background-color: white;
       }
       .content {
-        width: 80%;
-        height: 100%;
-        background-color: rgb(10, 9, 6);
+        grid-area: content;
+        background-color: rgb(247, 247, 247);
+      }
+      .side_bar {
+        width: 100%;
+        grid-area: side_bar;
       }
 
-      .side_bar .title{
-        width: 100%;
-        height: 8%;
+      /* 侧边栏样式 */
+      .side_bar {
+        background-color: white;
+        font-family: "微软雅黑";
       }
-      .side_bar .nav{
+      .side_bar .title {
         width: 100%;
-        height: 92%;
+        text-align: center;
+        font-size: 22px;
+        font-weight: 570;
+        color: rgb(53, 54, 63);
+
+        box-sizing: border-box;
+        padding: 15px 0px;
       }
-      .side_bar .nav ul{
+
+      .side_bar .nav {
+        width: 100%;
+        height: fit-content;
+
+        user-select: none;
+      }
+      .side_bar .nav ul {
+        width: 100%;
         list-style-type: none;
-        width: 100%;
-        height: 100%;
 
         display: flex;
         flex-direction: column;
         justify-content: flex-start;
         align-items: center;
-        row-gap: 10px;
+        row-gap: 5px;
+      }
+      .side_bar .nav > ul > li {
+        width: 85%;
+        color: rgb(166, 168, 178);
+        height: fit-content;
+      }
+      .side_bar .nav > ul {
+        column-gap: 5px;
+      }
 
-      }
-      .side_bar .nav ul li{
-        width: 80%;
-        height: 35px;
-        background-color: rgb(31, 31, 31);
-        border-radius: 20px;
+      /* 一级菜单 */
+      .side_bar .nav > ul > li > label {
+        height: 40px;
+        border-radius: 10px;
+        font-size: 13px;
 
-        transition: background-color;
-        transition-duration: 0.2s;
+        display: block flex;
+        justify-content: flex-start;
+        align-items: center;
+        column-gap: 6px;
+
+        box-sizing: border-box;
+        padding-left: 10px;
+        position: relative;
+
+        /* transition: background-color 0.1s linear; */
       }
-      .side_bar .nav ul li label{
-        display: block;
-        width: 100%;
-        height: 100%;
-      }
-      .side_bar .nav ul li label input{
+      .side_bar .nav > ul > li > label > input {
         display: none;
       }
-      .side_bar .nav ul li:has(label input:checked),.side_bar .nav ul li:hover{
-        background-color: rgb(47, 47, 47);
-        color: rgb(225, 225, 225);
+      .side_bar .nav > ul > li > label:has(> input:checked) {
+        background-color: rgb(108, 93, 211);
+        color: white;
+      }
+
+      .side_bar .nav > ul > li:has(.two_menu) > label::after {
+        content: ">";
+        position: absolute;
+        right: 10px;
+        transition: transform 0.2s linear;
+      }
+      .side_bar
+        .nav
+        > ul
+        > li:has(.two_menu)
+        > label:has(> input:checked)::after {
+        transform: rotate(90deg);
+      }
+
+      /* 二级菜单 */
+      .side_bar .nav ul .two_menu {
+        width: 100%;
+        height: 0px;
+        overflow: hidden;
+        transition: height 0.2s linear;
+
+        --two-menu-num: 5;
+        --two-menu-height: 27px;
+        --two-menu-total-height: calc(
+          var(--two-menu-num) * var(--two-menu-height)
+        );
+      }
+      .side_bar .nav ul .two_menu ul {
+        align-items: flex-start;
+        font-size: 13px;
+      }
+      .side_bar .nav ul .two_menu ul li label {
+        display: block;
+        border-radius: 10px;
+        box-sizing: border-box;
+        padding-left: 17px;
+
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+
+        transition: background-color 0.3s linear;
+      }
+      .side_bar .nav ul .two_menu ul,
+      .side_bar .nav ul .two_menu ul li,
+      .side_bar .nav ul .two_menu ul li label {
+        width: 100%;
+      }
+      .side_bar .nav ul .two_menu ul li,
+      .side_bar .nav ul .two_menu ul li label {
+        height: var(--two-menu-height);
+      }
+      .side_bar .nav ul .two_menu ul li label input {
+        display: none;
+      }
+      .side_bar .nav ul .two_menu ul li label:has(> input:checked) {
+        background-color: rgba(226, 226, 231, 0.692);
+        /* color: white; */
+      }
+      .side_bar .nav > ul > li:has(> label > input:checked) .two_menu {
+        height: var(--two-menu-total-height);
       }
     </style>
   </head>
   <body>
-    <!-- 侧边栏 -->
+    <!-- 顶部导航 -->
+    <div class="top_nav"></div>
+    <!-- 侧边栏  -->
     <div class="side_bar">
       <!-- 标题 -->
-      <div class="title">
-        <h1>小麦的网盘</h1>
-      </div>
-      <!-- 导航 -->
+      <div class="title">Wheatcloud</div>
+      <!-- 导航区域 -->
       <div class="nav">
         <ul>
-            <li class="nav_menu">
-                <label>
-                    <input type="radio" name="nav_menu">
-                    Lorem.
-                </label>
-            </li>
-            <li class="nav_menu">
-                <label>
-                    <input type="radio" name="nav_menu">
-                    endis.
-                </label>
-            </li>
-            <li class="nav_menu">
-                <label>
-                    <input type="radio" name="nav_menu">
-                    ellat?
-                </label>
-            </li>
-            <li class="nav_menu">
-                <label>
-                    <input type="radio" name="nav_menu">
-                    strum!
-                </label>
-            </li>
+          <li>
+            <label class="one_menu">
+              <input type="radio" name="nav_menu" checked />
+              <i class="fa-solid fa-house"></i>
+              <span>首页</span>
+            </label>
+          </li>
+          <li>
+            <label class="one_menu">
+              <input type="checkbox" name="" />
+              <i class="fa-solid fa-layer-group"></i>
+              <span>分类</span>
+            </label>
+            <!-- 二级菜单 -->
+            <div class="two_menu">
+              <ul>
+                <li>
+                  <label>
+                    <input type="radio" name="nav_menu" checked />
+                    <span>图片</span>
+                  </label>
+                </li>
+                <li>
+                  <label>
+                    <input type="radio" name="nav_menu" />
+                    <span>视频</span>
+                  </label>
+                </li>
+                <li>
+                  <label>
+                    <input type="radio" name="nav_menu" />
+                    <span>音频</span>
+                  </label>
+                </li>
+                <li>
+                  <label>
+                    <input type="radio" name="nav_menu" />
+                    <span>学习资料</span>
+                  </label>
+                </li>
+                <li>
+                  <label>
+                    <input type="radio" name="nav_menu" />
+                    <span>专业学习资料</span>
+                  </label>
+                </li>
+              </ul>
+            </div>
+          </li>
+          <li>
+            <label class="one_menu">
+              <input type="radio" name="nav_menu" checked />
+              <i class="fa-solid fa-share-nodes"></i>
+              <span>我的分享</span>
+            </label>
+          </li>
+          <li>
+            <label class="one_menu">
+              <input type="radio" name="nav_menu" checked />
+              <i class="fa-solid fa-trash-can"></i>
+              <span>回收站</span>
+            </label>
+          </li>
         </ul>
       </div>
     </div>
