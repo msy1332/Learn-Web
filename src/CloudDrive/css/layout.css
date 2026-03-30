@@ -1,0 +1,24 @@
+/* ÍøÒ³½á¹¹´úÂë */
+body {
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    grid-template-rows: 60px 1fr;
+    grid-template-areas:
+        "side_bar top_nav"
+        "side_bar content";
+}
+
+.top_nav {
+    grid-area: top_nav;
+    background-color: white;
+}
+
+.content {
+    grid-area: content;
+    background-color: rgb(247, 247, 247);
+}
+
+.side_bar {
+    width: 100%;
+    grid-area: side_bar;
+}

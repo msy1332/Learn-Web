@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!--引入字体图标CSS(Font Awesome) -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    />
+    <!-- 公共样式 -->
+    <link rel="stylesheet" href="css/public.css" />
+    <!-- 布局样式 -->
+    <link rel="stylesheet" href="css/layout.css" />
+    <!-- 侧边栏样式 -->
+    <link rel="stylesheet" href="css/sideBar.css" />
+    <!-- 顶部导航 -->
+    <link rel="stylesheet" href="css/topNav.css">
+    <title>CloudDrive</title>
+  </head>
+  <body class="light">
+    <!-- 顶部导航 -->
+    <div class="top_nav">
+      <!-- 主题切换 -->
+      <div class="theme">
+        <button><i class="fa-solid fa-sun"></i></button>
+        <button><i class="fa-solid fa-moon"></i></button>
+      </div>
+      <!-- 用户信息 -->
+      <div class="user_information">
+        <!-- 头像 -->
+        <div class="profile_photo">
+          <img src="https://t.alcy.cc/ycy" alt="头像">
+        </div>
+        <!-- 用户名 -->
+        <div class="user_name">Wheat</div>
+      </div>
+    </div>
+    <!-- 侧边栏  -->
+    <div class="side_bar">
+      <!-- 标题 -->
+      <div class="title">Wheatcloud</div>
+      <!-- 导航区域 -->
+      <div class="nav">
+        <ul>
+          <li>
+            <label class="one_menu">
+              <input type="radio" name="nav_menu" checked />
+              <i class="fa-solid fa-house"></i>
+              <span>首页</span>
+            </label>
+          </li>
+          <li>
+            <label class="one_menu">
+              <input type="checkbox" name="" />
+              <i class="fa-solid fa-layer-group"></i>
+              <span>分类</span>
+            </label>
+            <!-- 二级菜单 -->
+            <div class="two_menu">
+              <ul>
+                <li>
+                  <label>
+                    <input type="radio" name="nav_menu" checked />
+                    <span>图片</span>
+                  </label>
+                </li>
+                <li>
+                  <label>
+                    <input type="radio" name="nav_menu" />
+                    <span>视频</span>
+                  </label>
+                </li>
+                <li>
+                  <label>
+                    <input type="radio" name="nav_menu" />
+                    <span>音频</span>
+                  </label>
+                </li>
+                <li>
+                  <label>
+                    <input type="radio" name="nav_menu" />
+                    <span>学习资料</span>
+                  </label>
+                </li>
+                <li>
+                  <label>
+                    <input type="radio" name="nav_menu" />
+                    <span>专业学习资料</span>
+                  </label>
+                </li>
+              </ul>
+            </div>
+          </li>
+          <li>
+            <label class="one_menu">
+              <input type="radio" name="nav_menu" checked />
+              <i class="fa-solid fa-share-nodes"></i>
+              <span>我的分享</span>
+            </label>
+          </li>
+          <li>
+            <label class="one_menu">
+              <input type="radio" name="nav_menu" checked />
+              <i class="fa-solid fa-trash-can"></i>
+              <span>回收站</span>
+            </label>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <!-- 内容 -->
+    <div class="content"></div>
+    <script src="js/theme.js"></script>
+  </body>
+</html>

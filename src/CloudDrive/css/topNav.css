@@ -1,0 +1,74 @@
+.top_nav{
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    column-gap: 30px;
+}
+
+.top_nav .theme{
+    --theme-size: 35px;
+
+    width: var(--theme-size);
+    height: var(--theme-size);
+    position: relative;
+}
+
+.top_nav .theme button{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+
+    width: var(--theme-size);
+    height: var(--theme-size);
+    border: 0px;
+    outline: 0px;
+    font-size: 19px;
+    border-radius: 50%;
+    background-color: white;
+    transition: background-color 0.2s linear;
+    display: block;
+}
+
+.top_nav .user_information{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    column-gap: 10px;
+
+    padding-right: 60px;
+}
+
+.top_nav .user_information .profile_photo{
+    /* 头像的大小 */
+    --profile-photo-size: 30px;
+
+    width: var(--profile-photo-size);
+    height: var(--profile-photo-size);
+    border-radius: 50%;
+    overflow: hidden;
+}
+
+.top_nav .user_information .profile_photo img{
+    width: 100%;
+    height: 100%;
+}
+
+
+/* 交互相关的样式 */
+.top_nav .theme button:hover{
+    background-color: rgba(201, 200, 200, 0.699);
+}
+
+.top_nav .theme button:active{
+    background-color: rgb(255, 255, 255);
+}
+
+
+.light .top_nav .theme button:nth-child(1){
+    display: none;
+}
+
+.dark .top_nav .theme button:nth-child(2){
+    display: none;
+}
