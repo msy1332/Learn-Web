@@ -8,3 +8,21 @@ body {
     width: 100%;
     height: 100%;
 }
+
+:root{
+    --side-bar-background-color: white;
+    --top-nav-background-color: white;
+    --content-background-color: rgb(247, 247, 247);
+}
+
+.light{
+    --side-bar-background-color: white;
+    --top-nav-background-color: white;
+    --content-background-color: rgb(247, 247, 247);
+}
+
+.dark{
+    --side-bar-background-color: rgb(51, 46, 85);
+    --top-nav-background-color: rgb(51, 46, 85);
+    --content-background-color: rgb(39, 41, 62);
+}

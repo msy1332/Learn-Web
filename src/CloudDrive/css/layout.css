@@ -10,15 +10,19 @@ body {
 
 .top_nav {
     grid-area: top_nav;
-    background-color: white;
+    background-color: var(--top-nav-background-color);
 }
 
 .content {
     grid-area: content;
-    background-color: rgb(247, 247, 247);
+    background-color: var(--content-background-color);
 }
 
 .side_bar {
-    width: 100%;
     grid-area: side_bar;
+    background-color: var(--side-bar-background-color);
+}
+
+.top_nav,.side_bar,.content{
+    transition: background-color 0.2s linear;
 }

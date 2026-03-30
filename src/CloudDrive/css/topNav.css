@@ -25,9 +25,17 @@
     outline: 0px;
     font-size: 19px;
     border-radius: 50%;
-    background-color: white;
+    background-color: var(--top-nav-background-color);
     transition: background-color 0.2s linear;
     display: block;
+}
+
+.top_nav .theme button:nth-child(1){
+    color: white;
+}
+
+.top_nav .theme button:nth-child(2){
+    color: black;
 }
 
 .top_nav .user_information{
@@ -54,10 +62,17 @@
     height: 100%;
 }
 
+.light .top_nav .user_information .user_name{
+    color: black;
+}
+
+.dark .top_nav .user_information .user_name{
+    color: white;
+}
 
 /* 交互相关的样式 */
 .top_nav .theme button:hover{
-    background-color: rgba(201, 200, 200, 0.699);
+    background-color: rgba(201, 200, 200, 0.603);
 }
 
 .top_nav .theme button:active{

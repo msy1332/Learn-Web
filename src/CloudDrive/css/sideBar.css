@@ -1,6 +1,6 @@
 /* ²à±ßÀ¸ÑùÊ½ */
 .side_bar {
-    background-color: white;
+    /* background-color: white; */
     font-family: "Î¢ÈíÑÅºÚ";
 }
 
@@ -9,10 +9,16 @@
     text-align: center;
     font-size: 22px;
     font-weight: 570;
-    color: rgb(53, 54, 63);
 
     box-sizing: border-box;
     padding: 15px 0px;
+}
+.light .side_bar .title{
+    color: rgb(53, 54, 63);
+}
+
+.dark .side_bar .title{
+    color: white;
 }
 
 .side_bar .nav {
